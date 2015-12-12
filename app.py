@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask
 from flask import render_template
 
@@ -38,6 +40,8 @@ def getData():
 	query = 'SELECT FROM Listing WHERE latitude BETWEEN {} AND {} AND longitude BETWEEN {} AND {}'
 
 	records = client.command(query.format(lat1, lat2, lng1, lng2))
+	random.shuffle(records)
+        records = records[:100]
 
 	numListings = len(records)
 	print 'received ' + str(numListings) + ' records'
